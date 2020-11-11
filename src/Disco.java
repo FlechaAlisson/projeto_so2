@@ -20,10 +20,16 @@ public class Disco extends Thread{
                 LocalDateTime now = LocalDateTime.now();
                 out.println(dtf.format(now));
                 System.out.println("Disco: dei uma volta.");
+
+
+                out.close();
+                bw.close();
+                fw.close();
+
                 Thread.sleep(2500);
 
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Disco: Mas o arquivo já estava sendo usado em outro processo");
             }
 
         }

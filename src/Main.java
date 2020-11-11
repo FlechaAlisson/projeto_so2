@@ -8,9 +8,13 @@ public class Main {
         Processador p = new Processador();
         Teclado t = new Teclado();
         Disco d = new Disco();
+        Backup b = new Backup();
+
+
         p.start();
         t.start();
         d.start();
+        b.start();
 
     }
 }
