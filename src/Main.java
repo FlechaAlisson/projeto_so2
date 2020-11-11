@@ -9,14 +9,12 @@ public class Main {
         Processador p = new Processador(semaphore);
         Teclado t = new Teclado();
         Disco d = new Disco(semaphore);
-        Backup b = new Backup();
 
 
 
         p.start();
         t.start();
         d.start();
-        b.start();
 
     }
 }

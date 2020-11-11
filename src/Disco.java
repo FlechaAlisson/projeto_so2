@@ -1,7 +1,11 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Semaphore;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class Disco extends Thread{
     Semaphore s;
@@ -14,6 +18,33 @@ public class Disco extends Thread{
         }
     }
 
+    private void backup(){
+        File dir = new File("./backup");
+        int i = dir.listFiles().length;
+        int ultimoBackup = 0;
+        try{
+            String name = dir.listFiles()[i - 1].getName();
+            /**
+             * Pega o ultimo digito do ultimo backup e incrementa ele
+             * **/
+            ultimoBackup = (int) name.charAt(6) - (int) '0' + 1;
+        }catch (ArrayIndexOutOfBoundsException ignored){}
+
+
+
+        if (i > 2) dir.listFiles()[0].delete();
+
+
+        String path = "./backup/backup" + ultimoBackup + ".txt";
+
+        try{
+            Files.copy(Paths.get("./hora.txt"), Paths.get(path), REPLACE_EXISTING);
+        }catch (IOException ignored){}
+
+        System.out.println("Disco: backup feito!");
+    }
+
+
     @Override
     public void run() {
 
@@ -23,6 +54,7 @@ public class Disco extends Thread{
          * **/
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         while (true) {
+
 
             try {
                 s.acquire();
@@ -50,10 +82,12 @@ public class Disco extends Thread{
                 bw.close();
                 fw.close();
 
+                backup();
+
                 Thread.sleep(2500);
 
+
             } catch (IOException | InterruptedException e) {
-                System.out.println("Disco: Mas o arquivo já estava sendo usado em outro processo");
             }
 
         }
