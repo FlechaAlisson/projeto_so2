@@ -32,9 +32,8 @@ public class Backup extends Thread{
 
 
 
-            if (i > 2) {
-                 dir.listFiles()[0].delete();
-            }
+            if (i > 2) dir.listFiles()[0].delete();
+
 
             String path = "./backup/backup" + ultimoBackup + ".txt";
 

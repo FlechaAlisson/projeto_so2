@@ -1,14 +1,16 @@
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.util.concurrent.Semaphore;
 
 public class Main {
 
     public static void main(String[] args) {
-        Processador p = new Processador();
+        Semaphore semaphore = new Semaphore(1,false);
+
+
+        Processador p = new Processador(semaphore);
         Teclado t = new Teclado();
-        Disco d = new Disco();
+        Disco d = new Disco(semaphore);
         Backup b = new Backup();
+
 
 
         p.start();
