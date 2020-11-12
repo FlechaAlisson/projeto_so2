@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
 public class Main {
@@ -10,6 +12,15 @@ public class Main {
         Teclado t = new Teclado();
         Disco d = new Disco(semaphore);
 
+
+        File horatxt = new File("./hora.txt");
+        if (!horatxt.exists()) {
+            try {
+                horatxt.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         p.start();
