@@ -13,6 +13,10 @@ public class Main {
         Disco d = new Disco(semaphore);
 
 
+        /*
+        * Checa se hora.txt existe
+        * Se não existe, cria-o.
+        * */
         File horatxt = new File("./hora.txt");
         if (!horatxt.exists()) {
             try {
@@ -21,7 +25,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
 
         p.start();
         t.start();

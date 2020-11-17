@@ -30,7 +30,7 @@ public class Processador extends Thread {
             }else {
                 System.out.println("Processador ocioso");
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                         e.printStackTrace();
                 }

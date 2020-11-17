@@ -71,6 +71,7 @@ public class Disco extends Thread{
 
                 File dir = new File("./backup");
 
+                Thread.sleep(3500);
                 for (File f:dir.listFiles()) {
                     out.println(f.getName());
                 }
@@ -84,7 +85,6 @@ public class Disco extends Thread{
 
                 backup();
 
-                Thread.sleep(2500);
 
 
             } catch (IOException | InterruptedException e) {
