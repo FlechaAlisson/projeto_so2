@@ -32,7 +32,23 @@ public class Disco extends Thread{
 
 
 
-        if (i > 2) dir.listFiles()[0].delete();
+        if (i > 2){
+          int i1 =  dir.listFiles()[0].getName().charAt(6) - (int) '0' + 1;
+          int i2 =  dir.listFiles()[1].getName().charAt(6) - (int) '0' + 1;
+          int i3 =  dir.listFiles()[2].getName().charAt(6) - (int) '0' + 1;
+
+          if (i1 < i2 && i1 < i3){
+            dir.listFiles()[0].delete();
+          }else if (i2 < i3){
+            dir.listFiles()[1].delete();
+            System.out.println("ERRO: BACKUPS ESTÃO FORA DE ORDEM E POR ISSO" +
+              "É BEM PROVAVEL QUE O PROGRAMA NÃO SE COMPORTE DE FORMA CORRETA.");
+          }else {
+            dir.listFiles()[2].delete();
+          }
+
+
+        }
 
 
         String path = "./backup/backup" + ultimoBackup + ".txt";
